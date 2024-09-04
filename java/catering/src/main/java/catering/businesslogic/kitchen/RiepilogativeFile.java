@@ -12,4 +12,15 @@ public class RiepilogativeFile {
         return currentTask;
 
     }
+
+    public ArrayList<Task> getTasks() {return tasks;}
+
+    public void reorderTask(Task task, int position) {
+        tasks.remove(task);
+        tasks.add(position, task);
+    }
+
+    public boolean hasTask(Task task) {
+        return tasks.contains(task);
+    }
 }
