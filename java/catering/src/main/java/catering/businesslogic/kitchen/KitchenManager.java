@@ -55,10 +55,55 @@ public class KitchenManager {
     }
 
     public void defineCook(int id)throws UseCaseLogicException{
+        Task task = null;
         if(currentFile != null){
             Cook cook = new Cook(id);
-            }
 
+            task = currentFile.assignTask(cook);
+            notifyTaskAssigned(task);
+
+            }else throw new UseCaseLogicException();
+
+    }
+
+    public void deleteTask(Task task) throws UseCaseLogicException {
+        if(currentFile != null){
+
+            currentFile.deleteTask(task);
+            notifyTaskDeleted(task);
+
+        }else throw new UseCaseLogicException();
+
+    }
+
+    public void setCompleted(Task task) throws UseCaseLogicException {
+        if(currentFile != null){
+
+            currentFile.setCompleted(task);
+            notifyTaskCompleted(task);
+
+        }else throw new UseCaseLogicException();
+    }
+
+    private void notifyTaskCompleted(Task task) {
+        for (KitchenEventReciever er: this.eventRecievers){
+            er.updateTaskCompleted(task);
+        }
+    }
+
+
+    private void notifyTaskDeleted(Task task) {
+        for (KitchenEventReciever er: this.eventRecievers){
+            er.updateTaskDeleted(task);
+        }
+    }
+
+
+
+    private void notifyTaskAssigned(Task task) {
+        for (KitchenEventReciever er: this.eventRecievers){
+            er.updateTaskAssigned(task);
+        }
     }
 
     private void notifyFileCreated(RiepilogativeFile fr){
