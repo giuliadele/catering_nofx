@@ -42,16 +42,41 @@ public class KitchenManager {
         return task;
     }
 
-    private void notifyFileCreated(RiepilogativeFile fr) {
+    public void reorderTask(Task task,int position) throws UseCaseLogicException{
+        if(currentFile != null || currentFile.hasTask(task)){
+            if(position <0 || position>= currentFile.getTasks().size()){
+                throw new UseCaseLogicException();
+            }else {
+
+                currentFile.reorderTask(task,position);
+                notifyRearrangedTask(currentFile,task);
+            }
+        }else throw new UseCaseLogicException();
+    }
+
+    public void defineCook(int id)throws UseCaseLogicException{
+        if(currentFile != null){
+            Cook cook = new Cook(id);
+            }
+
+    }
+
+    private void notifyFileCreated(RiepilogativeFile fr){
         for (KitchenEventReciever er: this.eventRecievers){
             er.updateFileCreated(fr);
         }
     }
     private void notifyAddedTask(RiepilogativeFile fr, Task task) {
         for (KitchenEventReciever er: this.eventRecievers){
-            er.updateAddedTask(fr, task);
+            er.updateAddedTask(fr,task);
+        }
+    }
+    private void notifyRearrangedTask(RiepilogativeFile fr, Task task) {
+        for (KitchenEventReciever er: this.eventRecievers){
+            er.updateRearrangedTask(fr,task);
         }
     }
 
 
 }
+
