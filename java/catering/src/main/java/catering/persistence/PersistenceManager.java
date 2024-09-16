@@ -5,8 +5,8 @@ package catering.persistence;
 import java.sql.*;
 
 public class PersistenceManager {
-    private static String url = "jdbc:mysql://localhost:8889/catering?serverTimezone=UTC";
-    private static String username = "root";
+    private static String url = "jdbc:mysql://localhost:3306/catering?serverTimezone=UTC";
+    private static String username = "admin";
     private static String password = "root";
 
     // Usare la seguente stringa per connettersi a un database PostgreSQL

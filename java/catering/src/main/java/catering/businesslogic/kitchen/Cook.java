@@ -5,4 +5,8 @@ public class Cook {
     public Cook(int id){
         this.id = id;
     }
+
+    public int getId() {
+        return id;
+    }
 }

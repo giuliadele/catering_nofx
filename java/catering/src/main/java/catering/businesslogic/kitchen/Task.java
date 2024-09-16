@@ -24,4 +24,16 @@ public class Task {
     public void setCompleted() {
         this.completed = true;
     }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 }
